@@ -1,0 +1,27 @@
+{
+  "name": "hello-next",
+  "version": "0.0.1",
+  "description": "learning next.js https://nextjs.org/learn/basics/getting-started",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChaseVoid/hello-next.git"
+  },
+  "keywords": [],
+  "author": "Ajay Solleti <solleti.ajay@gmail.com> (https://twitter.com/AjaySolleti)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChaseVoid/hello-next/issues"
+  },
+  "homepage": "https://github.com/ChaseVoid/hello-next#readme",
+  "dependencies": {
+    "next": "^9.3.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
