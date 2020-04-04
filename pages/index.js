@@ -1,48 +1,71 @@
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import Layout from '../components/MyLayout.js'
+import Link from 'next/link'
 
-function fetcher(url) {
-  return fetch(url).then(r => r.json());
+function getPosts() {
+  return [
+    { id: 'hello-nextjs', title: 'Hello Next.js' },
+    { id: 'learn-nextjs', title: 'Learn Next.js is awesome' },
+    { id: 'deploy-nextjs', title: 'Deploy apps with ZEIT' }
+  ]
 }
 
-export default function Index() {
-  const { query } = useRouter();
-  const { data, error } = useSWR(
-    `/api/randomQuote${query.author ? '?author=' + query.author : ''}`,
-    fetcher
-  );
-  // The following line has optional chaining, added in Next.js v9.1.5,
-  // is the same as `data && data.author`
-  const author = data?.author;
-  let quote = data?.quote;
+const PostLink = ({ post }) => (
+  <li>
+    <Link href="/p/[id]" as={`/p/${post.id}`}>
+      <a>{post.title}</a>
+    </Link>
+    <style jsx>{`
+      li {
+        list-style: none;
+        margin: 5px 0;
+      }
 
-  if (!data) quote = 'Loading...';
-  if (error) quote = 'Failed to fetch the quote.';
+      a {
+        text-decoration: none;
+        color: blue;
+        font-family: 'Arial';
+      }
 
+      a:hover {
+        opacity: 0.6;
+      }
+    `}</style>
+  </li>
+)
+
+export default function Blog() {
   return (
-    <main className="center">
-      <div className="quote">{quote}</div>
-      {author && <span className="author">- {author}</span>}
-
+    <Layout>
+      <h1>My Blog</h1>
+      <ul>
+        {getPosts().map(post => (
+          <PostLink key={post.id} post={post} />
+        ))}
+      </ul>
       <style jsx>{`
-        main {
-          width: 90%;
-          max-width: 900px;
-          margin: 300px auto;
-          text-align: center;
+        h1,
+        a {
+          font-family: 'Arial';
         }
-        .quote {
-          font-family: cursive;
-          color: #e243de;
-          font-size: 24px;
-          padding-bottom: 10px;
+
+        ul {
+          padding: 0;
         }
-        .author {
-          font-family: sans-serif;
-          color: #559834;
-          font-size: 20px;
+
+        li {
+          list-style: none;
+          margin: 5px 0;
+        }
+
+        a {
+          text-decoration: none;
+          color: blue;
+        }
+
+        a:hover {
+          opacity: 0.6;
         }
       `}</style>
-    </main>
-  );
+    </Layout>
+  )
 }

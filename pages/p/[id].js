@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
-import Markdown from 'react-markdown';
-import Layout from '../../components/MyLayout';
+import { useRouter } from 'next/router'
+import Markdown from 'react-markdown'
+import Layout from '../../components/MyLayout.js'
 
 export default () => {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <Layout>
       <h1>{router.query.id}</h1>
@@ -41,5 +41,5 @@ And here's the content.
         }
       `}</style>
     </Layout>
-  );
-};
+  )
+}
